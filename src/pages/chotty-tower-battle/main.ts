@@ -79,13 +79,28 @@ setPositionFromTopLeft(
 Composite.add(engine.world, ground);
 
 let placeholderPosition = { x: 0, y: 0 };
-render.canvas.addEventListener("mousemove", function(event) {
-  const rect = render.canvas.getBoundingClientRect();
-  const scaleX = render.canvas.width / rect.width;
-  const mouseX = (event.clientX - rect.left) * scaleX;
+const handleMove = (event: TouchEvent | MouseEvent) => {
+  if (event.type === "touchmove") {
+    event.preventDefault();
+    // @ts-ignore
+    var touch = event.touches[0];
+    const rect = render.canvas.getBoundingClientRect();
+    const scaleX = render.canvas.width / rect.width;
+    const mouseX = (touch.clientX - rect.left) * scaleX;
 
-  placeholderPosition = { x: mouseX, y: 100 };
-});
+    placeholderPosition = { x: mouseX, y: 100 };
+  } else {
+    const rect = render.canvas.getBoundingClientRect();
+    const scaleX = render.canvas.width / rect.width;
+    // @ts-ignore
+    const mouseX = (event.clientX - rect.left) * scaleX;
+
+    placeholderPosition = { x: mouseX, y: 100 };
+  }
+};
+render.canvas.addEventListener("touchmove", handleMove);
+render.canvas.addEventListener("mousemove", handleMove);
+
 let index = 0;
 const images = [
   ChottyPng,
