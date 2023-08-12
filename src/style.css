@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "IchigoJam";
+  src: url("./assets/IchigoJam.woff") format("woff");
+}
+#count {
+  font-family: "IchigoJam";
+  font-size: 16px;
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}

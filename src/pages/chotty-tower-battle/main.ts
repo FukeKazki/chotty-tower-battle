@@ -179,6 +179,7 @@ const createChotty = (
   texture: string,
 ) => {
   const chotty = Bodies.fromVertices(x, y, vertices, {
+    label: "chotty",
     render: {
       sprite: {
         single: true,
@@ -212,3 +213,27 @@ render.canvas.addEventListener("mouseup", function() {
   Composite.add(engine.world, chotty);
   index++;
 });
+
+Events.on(engine, "afterUpdate", function() {
+  checkIfBoxesFell();
+});
+let count = 0;
+const countElement = document.getElementById("count");
+
+function checkIfBoxesFell() {
+  // エンジンの世界にあるすべての物体を取得
+  var bodies = Composite.allBodies(engine.world);
+  // label: chotty count
+  count = bodies.filter((v) => v.label === "chotty").length;
+  console.log(count);
+  countElement!.innerHTML = count.toString();
+
+  bodies.forEach(function(body) {
+    // 床のY座標よりも下にある場合
+    if (body.position.y > ground.position.y) {
+      // ボックスが床から落ちたと判定
+      // 必要に応じて、ボックスを世界から削除
+      Composite.remove(engine.world, body);
+    }
+  });
+}
