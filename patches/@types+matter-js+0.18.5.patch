@@ -1,0 +1,754 @@
+diff --git a/node_modules/@types/matter-js/index.d.ts b/node_modules/@types/matter-js/index.d.ts
+index a589f96..3955c59 100755
+--- a/node_modules/@types/matter-js/index.d.ts
++++ b/node_modules/@types/matter-js/index.d.ts
+@@ -74,7 +74,13 @@ declare namespace Matter {
+          * @param {number} [maxSides]
+          * @returns {Body} A new circle body
+          */
+-        static circle(x: number, y: number, radius: number, options?: IBodyDefinition, maxSides?: number): Body;
++        static circle(
++            x: number,
++            y: number,
++            radius: number,
++            options?: IBodyDefinition,
++            maxSides?: number,
++        ): Body;
+ 
+         /**
+          * Creates a new rigid body model with a regular polygon hull with the given number of sides.
+@@ -88,7 +94,13 @@ declare namespace Matter {
+          * @param {any} [options]
+          * @returns {Body} A new regular polygon body
+          */
+-        static polygon(x: number, y: number, sides: number, radius: number, options?: IChamferableBodyDefinition): Body;
++        static polygon(
++            x: number,
++            y: number,
++            sides: number,
++            radius: number,
++            options?: IChamferableBodyDefinition,
++        ): Body;
+ 
+         /**
+          * Creates a new rigid body model with a rectangle hull.
+@@ -463,21 +475,21 @@ declare namespace Matter {
+         sprite?: IBodyRenderOptionsSprite | undefined;
+ 
+         /**
+-         * A String that defines the fill style to use when rendering the body (if a sprite is not defined). It is the same as when using a canvas, so it accepts CSS style property values.
+-         Default: a random colour
+-        */
++             * A String that defines the fill style to use when rendering the body (if a sprite is not defined). It is the same as when using a canvas, so it accepts CSS style property values.
++             Default: a random colour
++            */
+         fillStyle?: string | undefined;
+ 
+         /**
+-         * A Number that defines the line width to use when rendering the body outline (if a sprite is not defined). A value of 0 means no outline will be rendered.
+-         Default: 1.5
+-        */
++             * A Number that defines the line width to use when rendering the body outline (if a sprite is not defined). A value of 0 means no outline will be rendered.
++             Default: 1.5
++            */
+         lineWidth?: number | undefined;
+ 
+         /**
+-         * A String that defines the stroke style to use when rendering the body outline (if a sprite is not defined). It is the same as when using a canvas, so it accepts CSS style property values.
+-         Default: a random colour
+-        */
++             * A String that defines the stroke style to use when rendering the body outline (if a sprite is not defined). It is the same as when using a canvas, so it accepts CSS style property values.
++             Default: a random colour
++            */
+         strokeStyle?: string | undefined;
+ 
+         /*
+@@ -487,6 +499,7 @@ declare namespace Matter {
+     }
+ 
+     export interface IBodyRenderOptionsSprite {
++        single: boolean;
+         /**
+          * An `String` that defines the path to the image to use as the sprite texture, if any.
+          *
+@@ -509,13 +522,13 @@ declare namespace Matter {
+     }
+ 
+     /**
+-    * The `Matter.Body` module contains methods for creating and manipulating body models.
+-    * A `Matter.Body` is a rigid body that can be simulated by a `Matter.Engine`.
+-    * Factories for commonly used body configurations (such as rectangles, circles and other polygons) can be found in the module `Matter.Bodies`.
+-    *
+-    * See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
++      * The `Matter.Body` module contains methods for creating and manipulating body models.
++      * A `Matter.Body` is a rigid body that can be simulated by a `Matter.Engine`.
++      * Factories for commonly used body configurations (such as rectangles, circles and other polygons) can be found in the module `Matter.Bodies`.
++      *
++      * See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
+   
+-    */
++      */
+     export class Body {
+         /**
+          * Applies a force to a body from a given world-space position, including resulting torque.
+@@ -670,7 +683,12 @@ declare namespace Matter {
+          * @param {number} scaleY
+          * @param {Vector} [point]
+          */
+-        static scale(body: Body, scaleX: number, scaleY: number, point?: Vector): void;
++        static scale(
++            body: Body,
++            scaleX: number,
++            scaleY: number,
++            point?: Vector,
++        ): void;
+ 
+         /**
+          * Moves a body by a given vector relative to its current position, without imparting any velocity.
+@@ -688,7 +706,12 @@ declare namespace Matter {
+          * @param {number} timeScale
+          * @param {number} correction
+          */
+-        static update(body: Body, deltaTime: number, timeScale: number, correction: number): void;
++        static update(
++            body: Body,
++            deltaTime: number,
++            timeScale: number,
++            correction: number,
++        ): void;
+ 
+         /**
+          * A `Number` specifying the angle of the body, in radians.
+@@ -1160,7 +1183,11 @@ declare namespace Matter {
+          * @param {boolean} keepStatic
+          * @param {boolean} [deep=false]
+          */
+-        static clear(composite: Composite, keepStatic: boolean, deep?: boolean): void;
++        static clear(
++            composite: Composite,
++            keepStatic: boolean,
++            deep?: boolean,
++        ): void;
+ 
+         /**
+          * Creates a new composite. The options parameter is an object that specifies any properties you wish to override the defaults.
+@@ -1179,7 +1206,11 @@ declare namespace Matter {
+          * @param {string} type
+          * @returns {any} The requested object, if found
+          */
+-        static get(composite: Composite, id: number, type: string): Body | Composite | Constraint;
++        static get(
++            composite: Composite,
++            id: number,
++            type: string,
++        ): Body | Composite | Constraint;
+ 
+         /**
+          * Moves the given object(s) from compositeA to compositeB (equal to a remove followed by an add).
+@@ -1213,7 +1244,7 @@ declare namespace Matter {
+          * @param {boolean} [deep=false]
+          * @returns {Composite} The original composite with the objects removed
+          */
+-         static remove(
++        static remove(
+             composite: Composite,
+             object:
+                 | Body
+@@ -1232,7 +1263,11 @@ declare namespace Matter {
+          * @param {Vector} translation
+          * @param {boolean} [recursive=true]
+          */
+-        static translate(composite: Composite, translation: Vector, recursive?: boolean): void;
++        static translate(
++            composite: Composite,
++            translation: Vector,
++            recursive?: boolean,
++        ): void;
+         /**
+          * Rotates all children in the composite by a given angle about the given point, without imparting any angular velocity.
+          * @method rotate
+@@ -1241,7 +1276,12 @@ declare namespace Matter {
+          * @param {Vector} point
+          * @param {boolean} [recursive=true]
+          */
+-        static rotate(composite: Composite, rotation: number, point: Vector, recursive?: boolean): void;
++        static rotate(
++            composite: Composite,
++            rotation: number,
++            point: Vector,
++            recursive?: boolean,
++        ): void;
+         /**
+          * Scales all children in the composite, including updating physical properties (mass, area, axes, inertia), from a world-space point.
+          * @method scale
+@@ -1251,7 +1291,13 @@ declare namespace Matter {
+          * @param {Vector} point
+          * @param {boolean} [recursive=true]
+          */
+-        static scale(composite: Composite, scaleX: number, scaleY: number, point: Vector, recursive?: boolean): void;
++        static scale(
++            composite: Composite,
++            scaleX: number,
++            scaleY: number,
++            point: Vector,
++            recursive?: boolean,
++        ): void;
+ 
+         /**
+          * An integer `Number` uniquely identifying number generated in `Composite.create` by `Common.nextId`.
+@@ -1342,7 +1388,13 @@ declare namespace Matter {
+          * @param {number} wheelSize
+          * @returns {Composite} A new composite car body
+          */
+-        static car(xx: number, yy: number, width: number, height: number, wheelSize: number): Composite;
++        static car(
++            xx: number,
++            yy: number,
++            width: number,
++            height: number,
++            wheelSize: number,
++        ): Composite;
+ 
+         /**
+          * Chains all bodies in the given composite together using constraints.
+@@ -1374,7 +1426,13 @@ declare namespace Matter {
+          * @param {any} options
+          * @returns {Composite} The composite containing objects meshed together with constraints
+          */
+-        static mesh(composite: Composite, columns: number, rows: number, crossBrace: boolean, options: any): Composite;
++        static mesh(
++            composite: Composite,
++            columns: number,
++            rows: number,
++            crossBrace: boolean,
++            options: any,
++        ): Composite;
+ 
+         /**
+          * This has now moved to the [newtonsCradle example](https://github.com/liabru/matter-js/blob/master/examples/newtonsCradle.js), follow that instead as this function is deprecated here.
+@@ -1387,7 +1445,13 @@ declare namespace Matter {
+          * @param {number} length
+          * @returns {Composite} A new composite newtonsCradle body
+          */
+-        static newtonsCradle(xx: number, yy: number, _number: number, size: number, length: number): Composite;
++        static newtonsCradle(
++            xx: number,
++            yy: number,
++            _number: number,
++            size: number,
++            length: number,
++        ): Composite;
+ 
+         /**
+          * Create a new composite containing bodies created in the callback in a pyramid arrangement.
+@@ -1587,7 +1651,7 @@ declare namespace Matter {
+          *
+          * @default 'line'
+          */
+-        type?: 'line' | 'pin' | 'spring' | undefined;
++        type?: "line" | "pin" | "spring" | undefined;
+     }
+ 
+     /**
+@@ -2003,7 +2067,12 @@ declare namespace Matter {
+          * @param {engine} engine
+          * @param {boolean} forceUpdate
+          */
+-        static update(grid: Grid, bodies: Array<Body>, engine: Engine, forceUpdate: boolean): void;
++        static update(
++            grid: Grid,
++            bodies: Array<Body>,
++            engine: Engine,
++            forceUpdate: boolean,
++        ): void;
+ 
+         /**
+          * Clears the grid.
+@@ -2081,7 +2150,10 @@ declare namespace Matter {
+          * @param {} options
+          * @returns {MouseConstraint} A new MouseConstraint
+          */
+-        static create(engine: Engine, options?: IMouseConstraintDefinition): MouseConstraint;
++        static create(
++            engine: Engine,
++            options?: IMouseConstraintDefinition,
++        ): MouseConstraint;
+ 
+         /**
+          * The `Constraint` object that is used to move the body during interaction.
+@@ -2148,7 +2220,11 @@ declare namespace Matter {
+          * @param {Collision[]} collisions
+          * @param {number} timestamp
+          */
+-        static update(pairs: Pairs, collisions: Array<Collision>, timestamp: number): void;
++        static update(
++            pairs: Pairs,
++            collisions: Array<Collision>,
++            timestamp: number,
++        ): void;
+     }
+ 
+     export interface Vertex extends Vector {
+@@ -2266,7 +2342,12 @@ declare namespace Matter {
+          * @param {number} [rayWidth]
+          * @returns {Collision[]} Collisions
+          */
+-        static ray(bodies: Array<Body>, startPoint: Vector, endPoint: Vector, rayWidth?: number): Array<Collision>;
++        static ray(
++            bodies: Array<Body>,
++            startPoint: Vector,
++            endPoint: Vector,
++            rayWidth?: number,
++        ): Array<Collision>;
+ 
+         /**
+          * Returns all bodies whose bounds are inside (or outside if set) the given set of bounds, from the given set of bodies.
+@@ -2276,7 +2357,11 @@ declare namespace Matter {
+          * @param {boolean} [outside=false]
+          * @returns {Body[]} The bodies matching the query
+          */
+-        static region(bodies: Array<Body>, bounds: Bounds, outside?: boolean): Array<Body>;
++        static region(
++            bodies: Array<Body>,
++            bounds: Bounds,
++            outside?: boolean,
++        ): Array<Body>;
+ 
+         /**
+          * Returns all bodies whose vertices contain the given point, from the given set of bodies.
+@@ -2820,7 +2905,10 @@ declare namespace Matter {
+          * @param {Number} [sampleLength=15]
+          * @returns {Vector[]} points
+          */
+-        static pathToVertices(path: SVGPathElement, sampleLength: number): Array<Vector>;
++        static pathToVertices(
++            path: SVGPathElement,
++            sampleLength: number,
++        ): Array<Vector>;
+     }
+ 
+     /**
+@@ -2976,7 +3064,12 @@ declare namespace Matter {
+          * @param {Vector} [output]
+          * @returns {Vector} A new vector rotated about the point
+          */
+-        static rotateAbout(vector: Vector, angle: number, point: Vector, output?: Vector): Vector;
++        static rotateAbout(
++            vector: Vector,
++            angle: number,
++            point: Vector,
++            output?: Vector,
++        ): Vector;
+ 
+         /**
+          * Subtracts the two vectors.
+@@ -3121,7 +3214,11 @@ declare namespace Matter {
+          * @param {Vector} point
+          * @returns {Vertices} vertices
+          */
+-        static rotate(vertices: Array<Vector>, angle: number, point: Vector): Array<Vector>;
++        static rotate(
++            vertices: Array<Vector>,
++            angle: number,
++            point: Vector,
++        ): Array<Vector>;
+ 
+         /**
+          * Scales the vertices from a point (default is centre) in-place.
+@@ -3132,7 +3229,12 @@ declare namespace Matter {
+          * @param {Vector} point
+          * @returns {Vertices} vertices
+          */
+-        static scale(vertices: Array<Vector>, scaleX: number, scaleY: number, point: Vector): Array<Vector>;
++        static scale(
++            vertices: Array<Vector>,
++            scaleX: number,
++            scaleY: number,
++            point: Vector,
++        ): Array<Vector>;
+ 
+         /**
+          * Translates the set of vertices in-place.
+@@ -3142,7 +3244,11 @@ declare namespace Matter {
+          * @param {number} scalar
+          * @returns {Vertices} vertices
+          */
+-        static translate(vertices: Array<Vector>, vector: Vector, scalar: number): Array<Vector>;
++        static translate(
++            vertices: Array<Vector>,
++            vector: Vector,
++            scalar: number,
++        ): Array<Vector>;
+     }
+ 
+     interface IWorldDefinition extends ICompositeDefinition {
+@@ -3337,7 +3443,13 @@ declare namespace Matter {
+          * @param {number} [end] Path slice end
+          * @returns {} Pass through `val` for chaining
+          */
+-        static set(obj: any, path: string, val: any, begin: number, end: number): any;
++        static set(
++            obj: any,
++            path: string,
++            val: any,
++            begin: number,
++            end: number,
++        ): any;
+ 
+         /**
+          * Shuffles the given array in-place.
+@@ -3561,7 +3673,11 @@ declare namespace Matter {
+          * @param {string} name The property name of the function on obj
+          * @param {string} warning The one-time message to show if the function is called
+          */
+-        static deprecated(obj: Record<string, any>, prop: string, warning: string): void;
++        static deprecated(
++            obj: Record<string, any>,
++            prop: string,
++            warning: string,
++        ): void;
+ 
+         /**
+          * Provide the [poly-decomp](https://github.com/schteppe/poly-decomp.js) library module to enable
+@@ -3613,7 +3729,7 @@ declare namespace Matter {
+     }
+ 
+     export interface IMouseEvent<T> extends IEvent<T> {
+-        name: 'mousedown' | 'mousemove' | 'mouseup';
++        name: "mousedown" | "mousemove" | "mouseup";
+     }
+ 
+     export class Events {
+@@ -3626,7 +3742,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Body, name: 'sleepStart', callback: (e: IEvent<Body>) => void): void;
++        static on(
++            obj: Body,
++            name: "sleepStart",
++            callback: (e: IEvent<Body>) => void,
++        ): void;
+         /**
+          * Fired when a body ends sleeping (where `this` is the body).
+          *
+@@ -3636,7 +3756,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Body, name: 'sleepEnd', callback: (e: IEvent<Body>) => void): void;
++        static on(
++            obj: Body,
++            name: "sleepEnd",
++            callback: (e: IEvent<Body>) => void,
++        ): void;
+ 
+         /**
+          * Fired when a call to `Composite.add` is made, before objects have been added.
+@@ -3647,7 +3771,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeAdd', callback: (e: IEventComposite<Composite>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeAdd",
++            callback: (e: IEventComposite<Composite>) => void,
++        ): void;
+ 
+         /**
+          * Fired when a call to `Composite.add` is made, after objects have been added.
+@@ -3658,7 +3786,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterAdd', callback: (e: IEventComposite<Composite>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterAdd",
++            callback: (e: IEventComposite<Composite>) => void,
++        ): void;
+ 
+         /**
+          * Fired when a call to `Composite.remove` is made, before objects have been removed.
+@@ -3669,7 +3801,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeRemove', callback: (e: IEventComposite<Composite>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeRemove",
++            callback: (e: IEventComposite<Composite>) => void,
++        ): void;
+ 
+         /**
+          * Fired when a call to `Composite.remove` is made, after objects have been removed.
+@@ -3680,7 +3816,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterRemove', callback: (e: IEventComposite<Composite>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterRemove",
++            callback: (e: IEventComposite<Composite>) => void,
++        ): void;
+ 
+         /**
+          * Fired after engine update and all collision events
+@@ -3691,7 +3831,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterUpdate', callback: (e: IEventTimestamped<Engine>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterUpdate",
++            callback: (e: IEventTimestamped<Engine>) => void,
++        ): void;
+ 
+         /**
+          * Fired before rendering
+@@ -3702,7 +3846,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeRender', callback: (e: IEventTimestamped<Render>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeRender",
++            callback: (e: IEventTimestamped<Render>) => void,
++        ): void;
+         /**
+          * Fired after rendering
+          *
+@@ -3712,7 +3860,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterRender', callback: (e: IEventTimestamped<Render>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterRender",
++            callback: (e: IEventTimestamped<Render>) => void,
++        ): void;
+ 
+         /**
+          * Fired just before an update
+@@ -3723,7 +3875,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeUpdate', callback: (e: IEventTimestamped<Engine>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeUpdate",
++            callback: (e: IEventTimestamped<Engine>) => void,
++        ): void;
+ 
+         /**
+          * Fired after engine update, provides a list of all pairs that are colliding in the current tick (if any)
+@@ -3735,7 +3891,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'collisionActive', callback: (e: IEventCollision<Engine>) => void): void;
++        static on(
++            obj: Engine,
++            name: "collisionActive",
++            callback: (e: IEventCollision<Engine>) => void,
++        ): void;
+ 
+         /**
+          * Fired after engine update, provides a list of all pairs that have ended collision in the current tick (if any)
+@@ -3747,7 +3907,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'collisionEnd', callback: (e: IEventCollision<Engine>) => void): void;
++        static on(
++            obj: Engine,
++            name: "collisionEnd",
++            callback: (e: IEventCollision<Engine>) => void,
++        ): void;
+ 
+         /**
+          * Fired after engine update, provides a list of all pairs that have started to collide in the current tick (if any)
+@@ -3759,7 +3923,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'collisionStart', callback: (e: IEventCollision<Engine>) => void): void;
++        static on(
++            obj: Engine,
++            name: "collisionStart",
++            callback: (e: IEventCollision<Engine>) => void,
++        ): void;
+ 
+         /**
+          * Fired at the start of a tick, before any updates to the engine or timing
+@@ -3770,7 +3938,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeTick', callback: (e: IEventTimestamped<Runner>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeTick",
++            callback: (e: IEventTimestamped<Runner>) => void,
++        ): void;
+ 
+         /**
+          * Fired after engine timing updated, but just before update
+@@ -3781,7 +3953,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'tick', callback: (e: IEventTimestamped<Runner>) => void): void;
++        static on(
++            obj: Engine,
++            name: "tick",
++            callback: (e: IEventTimestamped<Runner>) => void,
++        ): void;
+ 
+         /**
+          * Fired at the end of a tick, after engine update and after rendering
+@@ -3792,7 +3968,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterTick', callback: (e: IEventTimestamped<Runner>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterTick",
++            callback: (e: IEventTimestamped<Runner>) => void,
++        ): void;
+ 
+         /**
+          * Fired before rendering
+@@ -3803,7 +3983,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'beforeRender', callback: (e: IEventTimestamped<Runner>) => void): void;
++        static on(
++            obj: Engine,
++            name: "beforeRender",
++            callback: (e: IEventTimestamped<Runner>) => void,
++        ): void;
+ 
+         /**
+          * Fired after rendering
+@@ -3814,7 +3998,11 @@ declare namespace Matter {
+          * @param {} event.source The source object of the event
+          * @param {} event.name The name of the event
+          */
+-        static on(obj: Engine, name: 'afterRender', callback: (e: IEventTimestamped<Runner>) => void): void;
++        static on(
++            obj: Engine,
++            name: "afterRender",
++            callback: (e: IEventTimestamped<Runner>) => void,
++        ): void;
+ 
+         /**
+          * Fired when the mouse is down (or a touch has started) during the last step
+@@ -3822,7 +4010,11 @@ declare namespace Matter {
+          * @param name
+          * @param callback
+          */
+-        static on(obj: MouseConstraint, name: 'mousedown', callback: (e: IMouseEvent<MouseConstraint>) => void): void;
++        static on(
++            obj: MouseConstraint,
++            name: "mousedown",
++            callback: (e: IMouseEvent<MouseConstraint>) => void,
++        ): void;
+ 
+         /**
+          * Fired when the mouse has moved (or a touch moves) during the last step
+@@ -3830,7 +4022,11 @@ declare namespace Matter {
+          * @param name
+          * @param callback
+          */
+-        static on(obj: MouseConstraint, name: 'mousemove', callback: (e: IMouseEvent<MouseConstraint>) => void): void;
++        static on(
++            obj: MouseConstraint,
++            name: "mousemove",
++            callback: (e: IMouseEvent<MouseConstraint>) => void,
++        ): void;
+ 
+         /**
+          * Fired when the mouse is up (or a touch has ended) during the last step
+@@ -3838,7 +4034,11 @@ declare namespace Matter {
+          * @param name
+          * @param callback
+          */
+-        static on(obj: MouseConstraint, name: 'mouseup', callback: (e: IMouseEvent<MouseConstraint>) => void): void;
++        static on(
++            obj: MouseConstraint,
++            name: "mouseup",
++            callback: (e: IMouseEvent<MouseConstraint>) => void,
++        ): void;
+ 
+         static on(obj: any, name: string, callback: (e: any) => void): void;
+ 
+@@ -3861,7 +4061,10 @@ declare namespace Matter {
+         static trigger(object: any, eventNames: string, event?: any): void;
+     }
+ 
+-    type Dependency = { name: string; range: string } | { name: string; version: string } | string;
++    type Dependency =
++        | { name: string; range: string }
++        | { name: string; version: string }
++        | string;
+ 
+     export class Plugin {
+         name: string;
+@@ -3915,7 +4118,10 @@ declare namespace Matter {
+          * @param {} module The module.
+          * @returns {boolean} `true` if `plugin.for` is applicable to `module`, otherwise `false`.
+          */
+-        static isFor(plugin: Plugin, module: { name?: string | undefined;[_: string]: any }): boolean;
++        static isFor(
++            plugin: Plugin,
++            module: { name?: string | undefined;[_: string]: any },
++        ): boolean;
+ 
+         /**
+          * Installs the plugins by calling `plugin.install` on each plugin specified in `plugins` if passed, otherwise `module.uses`.
+@@ -3958,7 +4164,10 @@ declare namespace Matter {
+          * @param {Dependency} dependency The dependency of the format `'module-name'` or `'module-name@version'`.
+          * @returns {any} The dependency parsed into its components.
+          */
+-        static dependencyParse(dependency: Dependency): { name: string; range: string };
++        static dependencyParse(dependency: Dependency): {
++            name: string;
++            range: string;
++        };
+ 
+         /**
+          * Parses a version string into its components.
+@@ -4136,7 +4345,10 @@ declare namespace Matter {
+          * @param ICollisionFilter filterB
+          * @returns {boolean} `true` if collision can occur
+          */
+-        static canCollide(filterA: ICollisionFilter, filterB: ICollisionFilter): boolean;
++        static canCollide(
++            filterA: ICollisionFilter,
++            filterB: ICollisionFilter,
++        ): boolean;
+ 
+         /**
+          * Clears the detector including its list of bodies.
+@@ -4199,6 +4411,10 @@ declare namespace Matter {
+          * @param {Collision} previousCollision
+          * @returns {Collision} collision
+          */
+-        static collides(bodyA: Body, bodyB: Body, previousCollision?: Collision): Collision;
++        static collides(
++            bodyA: Body,
++            bodyB: Body,
++            previousCollision?: Collision,
++        ): Collision;
+     }
+ }
