@@ -41,3 +41,11 @@ export const fitCanvas = (body: Matter.Body, canvasHeight: number) => {
 export const getObjectWidth = (body: Matter.Body) => {
   return body.bounds.max.x - body.bounds.min.x;
 };
+
+// ユーザーエージェントをチェックしてモバイルデバイスかどうかを判定
+export const isMobileDevice = () => {
+  console.log(navigator.userAgent);
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
+};
