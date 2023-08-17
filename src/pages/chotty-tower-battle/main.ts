@@ -124,7 +124,7 @@ const images = [
   ChottyMogumoguPng,
   ChottyOmedetouPng,
 ];
-Events.on(render, "afterRender", function() {
+Events.on(render, "afterRender", function () {
   if (placeholderPosition) {
     var context = render.context;
     const imageData = images[index % images.length];
@@ -163,7 +163,7 @@ const save = () => {
     }),
   );
 };
-(async function() {
+(async function () {
   console.log("init!");
   const cache = localStorage.getItem("chotty-tower-battle");
   if (cache) {
@@ -237,18 +237,18 @@ if (!isMobileDevice()) {
   render.canvas.addEventListener("mouseup", handleTouch);
 }
 
-let offsetY = 0;
-const isStopped = (object: Matter.Body) => {
-  // オブジェクトの速度が非常に小さいかどうかを確認
-  if (
-    Math.abs(object.velocity.x) < 0.01 &&
-    Math.abs(object.velocity.y) < 0.01
-  ) {
-    return true;
-  }
-  return false;
-};
-Events.on(engine, "beforeUpdate", function() {
+// let offsetY = 0;
+// const isStopped = (object: Matter.Body) => {
+//   // オブジェクトの速度が非常に小さいかどうかを確認
+//   if (
+//     Math.abs(object.velocity.x) < 0.01 &&
+//     Math.abs(object.velocity.y) < 0.01
+//   ) {
+//     return true;
+//   }
+//   return false;
+// };
+Events.on(engine, "beforeUpdate", function () {
   let allBodies = Composite.allBodies(engine.world);
   allBodies = allBodies.filter((body) => body.label === "chotty");
   if (!allBodies) return;
@@ -268,7 +268,7 @@ Events.on(engine, "beforeUpdate", function() {
   //   console.log(offsetY);
   // }
 });
-Events.on(engine, "afterUpdate", function() {
+Events.on(engine, "afterUpdate", function () {
   checkIfBoxesFell();
   // render.context.translate(0, offsetY); // 描画コンテキストをオフセットに従って移動
 });
@@ -283,7 +283,7 @@ function checkIfBoxesFell() {
   console.log(count);
   countElement!.innerHTML = count.toString();
 
-  bodies.forEach(function(body) {
+  bodies.forEach(function (body) {
     // 床のY座標よりも下にある場合
     if (body.position.y > ground.position.y) {
       // ボックスが床から落ちたと判定
