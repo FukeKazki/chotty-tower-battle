@@ -20,8 +20,8 @@ import ChottyDanceSvg from "@/assets/chotty/dance.svg";
 import ChottyDancePng from "@/assets/chotty/dance.png";
 import ChottyMogumoguSvg from "@/assets/chotty/mogumogu.svg";
 import ChottyMogumoguPng from "@/assets/chotty/mogumogu.png";
-import ChottyOmedetouSvg from "@/assets/chotty/omedetou.svg";
-import ChottyOmedetouPng from "@/assets/chotty/omedetou.png";
+// import ChottyOmedetouSvg from "@/assets/chotty/omedetou.svg";
+// import ChottyOmedetouPng from "@/assets/chotty/omedetou.png";
 
 const engine = Engine.create();
 
@@ -122,7 +122,7 @@ const images = [
   ChottyPng,
   ChottyDancePng,
   ChottyMogumoguPng,
-  ChottyOmedetouPng,
+  // ChottyOmedetouPng,
 ];
 Events.on(render, "afterRender", function() {
   if (placeholderPosition) {
@@ -150,7 +150,7 @@ const loadAssets = async (url: string[]) => {
 let chottyVertices: Vector[][] | undefined;
 let chottyDanceVertices: Vector[][] | undefined;
 let chottyMogumoguVertices: Vector[][] | undefined;
-let chottyOmedetouVertices: Vector[][] | undefined;
+// let chottyOmedetouVertices: Vector[][] | undefined;
 
 const save = () => {
   localStorage.setItem(
@@ -159,7 +159,7 @@ const save = () => {
       chottyVertices,
       chottyDanceVertices,
       chottyMogumoguVertices,
-      chottyOmedetouVertices,
+      // chottyOmedetouVertices,
     }),
   );
 };
@@ -171,19 +171,19 @@ const save = () => {
     chottyVertices = data.chottyVertices;
     chottyDanceVertices = data.chottyDanceVertices;
     chottyMogumoguVertices = data.chottyMogumoguVertices;
-    chottyOmedetouVertices = data.chottyOmedetouVertices;
+    // chottyOmedetouVertices = data.chottyOmedetouVertices;
   } else {
     loadAssets([
       ChottySvg,
       ChottyDanceSvg,
       ChottyMogumoguSvg,
-      ChottyOmedetouSvg,
+      // ChottyOmedetouSvg,
     ]).then((v) => {
       [
         chottyVertices,
         chottyDanceVertices,
         chottyMogumoguVertices,
-        chottyOmedetouVertices,
+        // chottyOmedetouVertices,
       ] = v;
       save();
     });
@@ -219,9 +219,9 @@ const handleTouch = () => {
     chottyVertices,
     chottyDanceVertices,
     chottyMogumoguVertices,
-    chottyOmedetouVertices,
-  ][index % 4];
-  const image = images[index % 4];
+    // chottyOmedetouVertices,
+  ][index % 3];
+  const image = images[index % 3];
   if (!vertices) return;
   const chotty = createChotty(
     placeholderPosition.x,
@@ -280,7 +280,6 @@ function checkIfBoxesFell() {
   var bodies = Composite.allBodies(engine.world);
   // label: chotty count
   count = bodies.filter((v) => v.label === "chotty").length;
-  console.log(count);
   countElement!.innerHTML = count.toString();
 
   bodies.forEach(function(body) {
