@@ -8,49 +8,49 @@
 }
 
 #count {
-  font-family: IchigoJam, sans-serif;
-  font-size: 16px;
-  color: #fff;
   position: absolute;
   top: 10px;
   left: 10px;
+  font-family: IchigoJam, sans-serif;
+  font-size: 16px;
+  color: #fff;
 }
 
 #cover {
-  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   background: rgb(0 0 0 / 70%);
 }
 
 #logo {
-  font-family: IchigoJam, sans-serif;
-  z-index: 10;
-  font-size: 48px;
-  color: #fff;
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-family: IchigoJam, sans-serif;
+  font-size: 48px;
+  color: #fff;
   text-align: center;
   white-space: nowrap;
+  transform: translate(-50%, -50%);
 }
 
 #start {
-  font-family: IchigoJam, sans-serif;
-  z-index: 10;
-  font-size: 32px;
-  color: #fff;
   position: absolute;
   top: 70%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-family: IchigoJam, sans-serif;
+  font-size: 32px;
+  color: #fff;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
+  transform: translate(-50%, -50%);
 
   :hover {
     opacity: 0.8;
