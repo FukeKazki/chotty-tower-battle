@@ -1,6 +1,6 @@
 @font-face {
   font-family: IchigoJam;
-  src: url("./assets/IchigoJam.woff") format("woff");
+  src: url("@/assets/IchigoJam.woff") format("woff");
 }
 
 #app {

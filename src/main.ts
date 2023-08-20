@@ -13,15 +13,15 @@ import {
   getVerticesFromSvg,
   isMobileDevice,
   setPositionFromTopLeft,
-} from "../../helper";
-import ChottySvg from "../../assets/chotty/chotty.svg";
-import ChottyPng from "../../assets/chotty/chotty.png";
-import ChottyDanceSvg from "../../assets/chotty/dance.svg";
-import ChottyDancePng from "../../assets/chotty/dance.png";
-import ChottyMogumoguSvg from "../../assets/chotty/mogumogu.svg";
-import ChottyMogumoguPng from "../../assets/chotty/mogumogu.png";
-import ChottyOmedetouSvg from "../../assets/chotty/omedetou.svg";
-import ChottyOmedetouPng from "../../assets/chotty/omedetou.png";
+} from "@/helper";
+import ChottySvg from "@/assets/chotty/chotty.svg";
+import ChottyPng from "@/assets/chotty/chotty.png";
+import ChottyDanceSvg from "@/assets/chotty/dance.svg";
+import ChottyDancePng from "@/assets/chotty/dance.png";
+import ChottyMogumoguSvg from "@/assets/chotty/mogumogu.svg";
+import ChottyMogumoguPng from "@/assets/chotty/mogumogu.png";
+import ChottyOmedetouSvg from "@/assets/chotty/omedetou.svg";
+import ChottyOmedetouPng from "@/assets/chotty/omedetou.png";
 
 const engine = Engine.create();
 
@@ -124,7 +124,7 @@ const images = [
   ChottyMogumoguPng,
   ChottyOmedetouPng,
 ];
-Events.on(render, "afterRender", function () {
+Events.on(render, "afterRender", function() {
   if (placeholderPosition) {
     var context = render.context;
     const imageData = images[index % images.length];
@@ -163,7 +163,7 @@ const save = () => {
     }),
   );
 };
-(async function () {
+(async function() {
   console.log("init!");
   const cache = localStorage.getItem("chotty-tower-battle");
   if (cache) {
@@ -248,7 +248,7 @@ if (!isMobileDevice()) {
 //   }
 //   return false;
 // };
-Events.on(engine, "beforeUpdate", function () {
+Events.on(engine, "beforeUpdate", function() {
   let allBodies = Composite.allBodies(engine.world);
   allBodies = allBodies.filter((body) => body.label === "chotty");
   if (!allBodies) return;
@@ -268,7 +268,7 @@ Events.on(engine, "beforeUpdate", function () {
   //   console.log(offsetY);
   // }
 });
-Events.on(engine, "afterUpdate", function () {
+Events.on(engine, "afterUpdate", function() {
   checkIfBoxesFell();
   // render.context.translate(0, offsetY); // 描画コンテキストをオフセットに従って移動
 });
@@ -283,7 +283,7 @@ function checkIfBoxesFell() {
   console.log(count);
   countElement!.innerHTML = count.toString();
 
-  bodies.forEach(function (body) {
+  bodies.forEach(function(body) {
     // 床のY座標よりも下にある場合
     if (body.position.y > ground.position.y) {
       // ボックスが床から落ちたと判定
