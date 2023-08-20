@@ -10,18 +10,13 @@ import {
 } from "matter-js";
 import {
   getObjectWidth,
-  getVerticesFromSvg,
   isMobileDevice,
   setPositionFromTopLeft,
 } from "@/helper";
-import ChottySvg from "@/assets/chotty/chotty.svg";
 import ChottyPng from "@/assets/chotty/chotty.png";
-import ChottyDanceSvg from "@/assets/chotty/dance.svg";
 import ChottyDancePng from "@/assets/chotty/dance.png";
-import ChottyMogumoguSvg from "@/assets/chotty/mogumogu.svg";
 import ChottyMogumoguPng from "@/assets/chotty/mogumogu.png";
-// import ChottyOmedetouSvg from "@/assets/chotty/omedetou.svg";
-// import ChottyOmedetouPng from "@/assets/chotty/omedetou.png";
+import data from "@/assets/data.json"
 
 const engine = Engine.create();
 
@@ -122,7 +117,6 @@ const images = [
   ChottyPng,
   ChottyDancePng,
   ChottyMogumoguPng,
-  // ChottyOmedetouPng,
 ];
 Events.on(render, "afterRender", function() {
   if (placeholderPosition) {
@@ -143,51 +137,15 @@ Events.on(render, "afterRender", function() {
   }
 });
 
-const loadAssets = async (url: string[]) => {
-  return Promise.all(url.map((v) => getVerticesFromSvg(v)));
-};
-
 let chottyVertices: Vector[][] | undefined;
 let chottyDanceVertices: Vector[][] | undefined;
 let chottyMogumoguVertices: Vector[][] | undefined;
-// let chottyOmedetouVertices: Vector[][] | undefined;
 
-const save = () => {
-  localStorage.setItem(
-    "chotty-tower-battle",
-    JSON.stringify({
-      chottyVertices,
-      chottyDanceVertices,
-      chottyMogumoguVertices,
-      // chottyOmedetouVertices,
-    }),
-  );
-};
 (async function() {
   console.log("init!");
-  const cache = localStorage.getItem("chotty-tower-battle");
-  if (cache) {
-    const data = JSON.parse(cache);
-    chottyVertices = data.chottyVertices;
-    chottyDanceVertices = data.chottyDanceVertices;
-    chottyMogumoguVertices = data.chottyMogumoguVertices;
-    // chottyOmedetouVertices = data.chottyOmedetouVertices;
-  } else {
-    loadAssets([
-      ChottySvg,
-      ChottyDanceSvg,
-      ChottyMogumoguSvg,
-      // ChottyOmedetouSvg,
-    ]).then((v) => {
-      [
-        chottyVertices,
-        chottyDanceVertices,
-        chottyMogumoguVertices,
-        // chottyOmedetouVertices,
-      ] = v;
-      save();
-    });
-  }
+  chottyVertices = data.chottyVertices;
+  chottyDanceVertices = data.chottyDanceVertices;
+  chottyMogumoguVertices = data.chottyMogumoguVertices;
   console.log("loaded");
 })();
 
