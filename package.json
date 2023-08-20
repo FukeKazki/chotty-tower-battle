@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "stylelint": "stylelint --fix \"src/**/*.css\""
   },
   "devDependencies": {
     "@types/matter-js": "^0.18.5",
     "patch-package": "^8.0.0",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.9"
   },
